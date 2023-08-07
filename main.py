@@ -4,7 +4,7 @@ import os
 import random
 from telebot import types
 
-bot = telebot.TeleBot('6531315310:AAGcjLIrewkxVk9Ni8RM1-jWVZQLy8dwqSo')
+bot = telebot.TeleBot('6105537704:AAEFyJgTiFhNKz6vEbCN1UjFlaFS3BXGN84')
 
 @bot.message_handler(commands=['start'])
 def start(massage):
