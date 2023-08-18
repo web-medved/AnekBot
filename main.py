@@ -1187,7 +1187,7 @@ def help(message):
     with open(file_path, 'r', encoding='utf-8') as file:
         text = file.read()
     bot.send_message(chat_id=message.chat.id, text=text)
-    # bot.send_document(message.chat.id, document=open('Живой сборник анекдотов.pdf', 'rb'))
+    bot.send_document(message.chat.id, document=open('Живой сборник анекдотов.pdf', 'rb'))
 
 @bot.message_handler(commands=['restart'])
 def restart(message):
