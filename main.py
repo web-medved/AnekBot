@@ -1,29 +1,26 @@
 import telebot
-import glob
 import os
 import random
+import os.path
 from telebot import types
 
 bot = telebot.TeleBot('6105537704:AAEFyJgTiFhNKz6vEbCN1UjFlaFS3BXGN84')
 
+# bot.set_webhook()
 @bot.message_handler(commands=['start'])
 def start(massage):
     markup = types.ReplyKeyboardMarkup()
     btn_help = types.KeyboardButton('Помощь🆘')
     btn_restart = types.KeyboardButton('Перезапуск🔃')
     btn_list = types.KeyboardButton('Список анекдотов📋')
-    btn_number = types.KeyboardButton('Поиск анекдота по номеру🔎')
-    btn_name = types.KeyboardButton('Поиск анекдота по названию🔍')
+    btn_name = types.KeyboardButton('Поиск анекдота🔎')
     btn_random = types.KeyboardButton('Случайный анек🎲')
 
-    markup.row(btn_list, btn_random)
-    markup.row(btn_number, btn_name)
+    markup.row(btn_list)
+    markup.row(btn_name, btn_random)
     markup.row(btn_help,btn_restart)
 
-    if massage.from_user.last_name == None:
-        last_name = 'Саныч'
-    else:
-        last_name = massage.from_user.last_name
+    last_name = 'Саныч'
     bot.send_message(massage.chat.id, f'Я вас категорически приветствую, {massage.from_user.first_name} {last_name}!',
                      reply_markup=markup)
 
@@ -37,9 +34,17 @@ def Anek1(message):
 @bot.message_handler(commands=['Anek2'])
 def Anek2(message):
     file_path = 'Aneks/Anek2.txt'
-    with open(file_path, 'r', encoding='utf-8') as file:
-        text = file.read()
-    bot.send_message(chat_id=message.chat.id, text=text)
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            text = file.read()
+        # bot.send_message(chat_id=message.chat.id, text=text)
+    except Exception as e:
+        text = f'Ошибка при открытии файла: {str(e)}'
+    if len(text) > 4092:  # max = 4096
+        for x in range(0, len(text), 4092):
+            bot.send_message(message.chat.id, '{}'.format(text[x:x + 4092]))
+    else:
+        bot.send_message(message.chat.id, '{}'.format(text))
 
 @bot.message_handler(commands=['Anek3'])
 def Anek3(message):
@@ -363,9 +368,15 @@ def Anek46(message):
         text = file.read()
     bot.send_message(chat_id=message.chat.id, text=text)
 
-@bot.message_handler(commands=['Anek47'])
-def Anek47(message):
-    file_path = 'Aneks/Anek47.txt'
+@bot.message_handler(commands=['Anek47_1'])
+def Anek47_1(message):
+    file_path = 'Aneks/Anek47.1.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+@bot.message_handler(commands=['Anek47_2'])
+def Anek47_2(message):
+    file_path = 'Aneks/Anek47.2.txt'
     with open(file_path, 'r', encoding='utf-8') as file:
         text = file.read()
     bot.send_message(chat_id=message.chat.id, text=text)
@@ -685,9 +696,16 @@ def Anek91(message):
         text = file.read()
     bot.send_message(chat_id=message.chat.id, text=text)
 
-@bot.message_handler(commands=['Anek92'])
-def Anek92(message):
-    file_path = 'Aneks/Anek92.txt'
+@bot.message_handler(commands=['Anek92_1'])
+def Anek92_1(message):
+    file_path = 'Aneks/Anek92.1.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek92_2'])
+def Anek92_2(message):
+    file_path = 'Aneks/Anek92.2.txt'
     with open(file_path, 'r', encoding='utf-8') as file:
         text = file.read()
     bot.send_message(chat_id=message.chat.id, text=text)
@@ -790,6 +808,349 @@ def Anek105(message):
         text = file.read()
     bot.send_message(chat_id=message.chat.id, text=text)
 
+@bot.message_handler(commands=['Anek106'])
+def Anek106(message):
+    file_path = 'Aneks/Anek106.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek107'])
+def Anek107(message):
+    file_path = 'Aneks/Anek107.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek108'])
+def Anek108(message):
+    file_path = 'Aneks/Anek108.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek109'])
+def Anek109(message):
+    file_path = 'Aneks/Anek109.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek110'])
+def Anek110(message):
+    file_path = 'Aneks/Anek110.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek111_1'])
+def Anek111_1(message):
+    file_path = 'Aneks/Anek111.1.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek111_2'])
+def Anek111_2(message):
+    file_path = 'Aneks/Anek111.2.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek111_3'])
+def Anek111_3(message):
+    file_path = 'Aneks/Anek111.3.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek112'])
+def Anek112(message):
+    file_path = 'Aneks/Anek112.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek113'])
+def Anek113(message):
+    file_path = 'Aneks/Anek113.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek114'])
+def Anek114(message):
+    file_path = 'Aneks/Anek114.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek115'])
+def Anek115(message):
+    file_path = 'Aneks/Anek115.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek116'])
+def Anek116(message):
+    file_path = 'Aneks/Anek116.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek117'])
+def Anek117(message):
+    file_path = 'Aneks/Anek117.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek118_1'])
+def Anek118_1(message):
+    file_path = 'Aneks/Anek118.1.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek118_2'])
+def Anek118_2(message):
+    file_path = 'Aneks/Anek118.2.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek119'])
+def Anek119(message):
+    file_path = 'Aneks/Anek119.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek120_1'])
+def Anek120_1(message):
+    file_path = 'Aneks/Anek120.1.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek120_2'])
+def Anek120_2(message):
+    file_path = 'Aneks/Anek120.2.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek121'])
+def Anek121(message):
+    file_path = 'Aneks/Anek121.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek122'])
+def Anek122(message):
+    file_path = 'Aneks/Anek122.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek123_1'])
+def Anek123_1(message):
+    file_path = 'Aneks/Anek123.1.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek123_2'])
+def Anek123_2(message):
+    file_path = 'Aneks/Anek123.2.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek124'])
+def Anek124(message):
+    file_path = 'Aneks/Anek124.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek125'])
+def Anek125(message):
+    file_path = 'Aneks/Anek125.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek126'])
+def Anek126(message):
+    file_path = 'Aneks/Anek126.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek127'])
+def Anek127(message):
+    file_path = 'Aneks/Anek127.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek128'])
+def Anek128(message):
+    file_path = 'Aneks/Anek128.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek129'])
+def Anek129(message):
+    file_path = 'Aneks/Anek129.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek130'])
+def Anek130(message):
+    file_path = 'Aneks/Anek130.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek131'])
+def Anek131(message):
+    file_path = 'Aneks/Anek131.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek132'])
+def Anek132(message):
+    file_path = 'Aneks/Anek132.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek133'])
+def Anek133(message):
+    file_path = 'Aneks/Anek133.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek134'])
+def Anek134(message):
+    file_path = 'Aneks/Anek134.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek135'])
+def Anek135(message):
+    file_path = 'Aneks/Anek135.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek136'])
+def Anek136(message):
+    file_path = 'Aneks/Anek136.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek137_1'])
+def Anek137_1(message):
+    file_path = 'Aneks/Anek137.1.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek137_2'])
+def Anek137_2(message):
+    file_path = 'Aneks/Anek137.2.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek138'])
+def Anek138(message):
+    file_path = 'Aneks/Anek138.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek139'])
+def Anek139(message):
+    file_path = 'Aneks/Anek139.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek140'])
+def Anek140(message):
+    file_path = 'Aneks/Anek140.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek141'])
+def Anek141(message):
+    file_path = 'Aneks/Anek141.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek142'])
+def Anek142(message):
+    file_path = 'Aneks/Anek142.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek143'])
+def Anek143(message):
+    file_path = 'Aneks/Anek143.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek144'])
+def Anek144(message):
+    file_path = 'Aneks/Anek144.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek145'])
+def Anek145(message):
+    file_path = 'Aneks/Anek145.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek146'])
+def Anek146(message):
+    file_path = 'Aneks/Anek146.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek147'])
+def Anek147(message):
+    file_path = 'Aneks/Anek147.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
+@bot.message_handler(commands=['Anek148'])
+def Anek148(message):
+    file_path = 'Aneks/Anek148.txt'
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    bot.send_message(chat_id=message.chat.id, text=text)
+
 @bot.message_handler(content_types=['text'])
 def on_click(message):
     if message.text == 'Список анекдотов📋':
@@ -800,14 +1161,15 @@ def on_click(message):
                 text = file.read()
         except Exception as e:
             text = f'Ошибка при открытии файла: {str(e)}'
-        bot.send_message(chat_id=message.chat.id, text=text)
+        if len(text) > 4084: #max = 4096
+            for x in range(0, len(text), 4084):
+                bot.send_message(message.chat.id, '{}'.format(text[x:x + 4084]))
+        else:
+            bot.send_message(message.chat.id, '{}'.format(text))
+        # bot.send_message(chat_id=message.chat.id, text=text)
 
-    elif message.text == 'Поиск анекдота по номеру🔎':
-        bot.send_message(chat_id=message.chat.id, text='Введите номер анекдота в списке')
-        bot.register_next_step_handler(message, find_number)
-
-    elif message.text == 'Поиск анекдота по названию🔍':
-        bot.send_message(chat_id=message.chat.id, text='Введите название анекдота в списке')
+    elif message.text == 'Поиск анекдота🔎':
+        bot.send_message(chat_id=message.chat.id, text='Введите название или номер анекдота в списке')
         bot.register_next_step_handler(message, find_name)
 
     elif message.text == 'Перезапуск🔃':
@@ -825,6 +1187,7 @@ def help(message):
     with open(file_path, 'r', encoding='utf-8') as file:
         text = file.read()
     bot.send_message(chat_id=message.chat.id, text=text)
+    # bot.send_document(message.chat.id, document=open('Живой сборник анекдотов.pdf', 'rb'))
 
 @bot.message_handler(commands=['restart'])
 def restart(message):
@@ -839,26 +1202,6 @@ def restart_text(message):
     if message.text == 'Перезапуск🔃':
         bot.send_message(chat_id=message.chat.id, text='Перезапуск выполнен')
         start(message)
-
-def find_number(message):
-    try:
-        num = message.text
-        if num == 'Помощь🆘' or num == 'Перезапуск🔃' or num == 'Список анекдотов📋' \
-                or num == 'Поиск анекдота по номеру🔎' or num == 'Поиск анекдота по названию🔍'\
-                or num == 'Случайный анек🎲':
-            on_click(message)
-        else:
-            num_int = float(num)
-            if num_int < 106:
-                for file_path in sorted(glob.glob(f'Aneks/Anek{num}.txt')):
-                    with open(file_path, 'r', encoding='utf-8') as file:
-                        text = file.read()
-                    bot.send_message(chat_id=message.chat.id, text=text)
-            else:
-                bot.send_message(chat_id=message.chat.id, text='В списке нет такого анека')
-            bot.register_next_step_handler(message, find_number)
-    except:
-        bot.send_message(chat_id=message.chat.id, text='Мне нужнен номер, а не этот бред')
 
 def find_name(message):
     try:
@@ -960,8 +1303,10 @@ def find_name(message):
             Anek45(message)
         elif name == '/Anek46':
             Anek46(message)
-        elif name == '/Anek47':
-            Anek47(message)
+        elif name == '/Anek47_1':
+            Anek47_1(message)
+        elif name == '/Anek47_2':
+            Anek47_2(message)
         elif name == '/Anek48_1':
             Anek48_1(message)
         elif name == '/Anek48_2':
@@ -1052,8 +1397,10 @@ def find_name(message):
             Anek90(message)
         elif name == '/Anek91':
             Anek91(message)
-        elif name == '/Anek92':
-            Anek92(message)
+        elif name == '/Anek92_1':
+            Anek92_1(message)
+        elif name == '/Anek92_2':
+            Anek92_2(message)
         elif name == '/Anek93':
             Anek93(message)
         elif name == '/Anek94':
@@ -1082,6 +1429,104 @@ def find_name(message):
             Anek104(message)
         elif name == '/Anek105':
             Anek105(message)
+        elif name == '/Anek106':
+            Anek106(message)
+        elif name == '/Anek107':
+            Anek107(message)
+        elif name == '/Anek108':
+            Anek108(message)
+        elif name == '/Anek109':
+            Anek109(message)
+        elif name == '/Anek110':
+            Anek110(message)
+        elif name == '/Anek111_1':
+            Anek111_1(message)
+        elif name == '/Anek111_2':
+            Anek111_2(message)
+        elif name == '/Anek111_3':
+            Anek111_3(message)
+        elif name == '/Anek112':
+            Anek112(message)
+        elif name == '/Anek113':
+            Anek113(message)
+        elif name == '/Anek114':
+            Anek114(message)
+        elif name == '/Anek115':
+            Anek115(message)
+        elif name == '/Anek116':
+            Anek116(message)
+        elif name == '/Anek117':
+            Anek117(message)
+        elif name == '/Anek118_1':
+            Anek118_1(message)
+        elif name == '/Anek118_2':
+            Anek118_2(message)
+        elif name == '/Anek119':
+            Anek119(message)
+        elif name == '/Anek120_1':
+            Anek120_1(message)
+        elif name == '/Anek120_2':
+            Anek120_2(message)
+        elif name == '/Anek121':
+            Anek121(message)
+        elif name == '/Anek122':
+            Anek122(message)
+        elif name == '/Anek123_1':
+            Anek123_1(message)
+        elif name == '/Anek123_2':
+            Anek123_2(message)
+        elif name == '/Anek124':
+            Anek124(message)
+        elif name == '/Anek125':
+            Anek125(message)
+        elif name == '/Anek126':
+            Anek126(message)
+        elif name == '/Anek127':
+            Anek127(message)
+        elif name == '/Anek128':
+            Anek128(message)
+        elif name == '/Anek129':
+            Anek129(message)
+        elif name == '/Anek130':
+            Anek130(message)
+        elif name == '/Anek131':
+            Anek131(message)
+        elif name == '/Anek132':
+            Anek132(message)
+        elif name == '/Anek133':
+            Anek133(message)
+        elif name == '/Anek134':
+            Anek134(message)
+        elif name == '/Anek135':
+            Anek135(message)
+        elif name == '/Anek136':
+            Anek136(message)
+        elif name == '/Anek137_1':
+            Anek137_1(message)
+        elif name == '/Anek137_2':
+            Anek137_2(message)
+        elif name == '/Anek138':
+            Anek138(message)
+        elif name == '/Anek139':
+            Anek139(message)
+        elif name == '/Anek140':
+            Anek140(message)
+        elif name == '/Anek141':
+            Anek141(message)
+        elif name == '/Anek142':
+            Anek142(message)
+        elif name == '/Anek143':
+            Anek143(message)
+        elif name == '/Anek144':
+            Anek144(message)
+        elif name == '/Anek145':
+            Anek145(message)
+        elif name == '/Anek146':
+            Anek146(message)
+        elif name == '/Anek147':
+            Anek147(message)
+        elif name == '/Anek148':
+            Anek148(message)
 
         else:
             k = 0
@@ -1093,22 +1538,20 @@ def find_name(message):
                         bot.send_message(chat_id=message.chat.id, text=text)
 
             if name == 'Помощь🆘' or name == 'Перезапуск🔃' or name == 'Список анекдотов📋' \
-                or name == 'Поиск анекдота по номеру🔎' or name == 'Поиск анекдота по названию🔍'\
-                or name == 'Случайный анек🎲':
+                or name == 'Поиск анекдота🔎' or name == 'Случайный анек🎲':
                 on_click(message)
             else:
                 if k == 0:
                     bot.send_message(chat_id=message.chat.id, text=f'В списке нет такого анека \n'
-                                                                   'Попробуй написать с большой буквы или введи другое название')
-                bot.register_next_step_handler(message, find_name)
+                                                                   'Попробуй написать название с Заглавной или строчной буквы. Если не помогло, то введи другое название')
+        bot.register_next_step_handler(message, find_name)
     except:
         on_click(message)
 
 def random_anek(message):
     name = message.text
     if name == 'Помощь🆘' or name == 'Перезапуск🔃' or name == 'Список анекдотов📋' \
-            or name == 'Поиск анекдота по номеру🔎' or name == 'Поиск анекдота по названию🔍' \
-            or name == 'Случайный анек🎲':
+            or name == 'Поиск анекдота🔎' or name == 'Случайный анек🎲':
 
         # Указываем название нужной директории
         folder = "Aneks"
